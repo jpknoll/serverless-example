@@ -1,0 +1,26 @@
+service:
+  name: serverless-example-typescript
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  pokedex:
+    handler: handler.pokedex
+    events:
+      - http:
+          method: post
+          path: pokedex
+
+
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'  # Name of webpack configuration file
+    includeModules: true                # Node modules configuration for packaging
+    packager: 'npm'                     # Packager that will be used to package your external modules
